@@ -1,12 +1,9 @@
-"use client";
-import Image from "next/image";
+import Header from "../_components/header";
 
 export default function Home() {
-  const handleClick = () => {
-    const data = new Date();
-
-    console.log(data);
-  };
-
-  return <h1>Fsw</h1>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
