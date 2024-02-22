@@ -19,7 +19,7 @@ export default function Home() {
         <Search />
       </div>
       <div className="px-5">
-        <h1 className="text-[#838896] mb-3 text-sm">AGENDAMENTOS</h1>
+        <h1 className="text-[#838896] mb-3 text-sm uppercase">Agendamentos</h1>
         <BookingItem />
       </div>
     </div>
