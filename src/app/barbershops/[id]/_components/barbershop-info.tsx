@@ -16,6 +16,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
 
   const handleClickBack = () => {
     router.back();
+    
   };
   return (
     <div>
