@@ -70,7 +70,7 @@ const MenuSheet = () => {
             >
               <Link href={"/"}>
                 <HomeIcon size={18} className="mr-2"/>
-                Agendamentos
+                Inicio
               </Link>
             </Button>
           </div>

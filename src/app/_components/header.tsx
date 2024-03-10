@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <Card>
       <CardContent className="py-6 px-5 flex items-center justify-between">
-        <Image src={"/Logo.png"} alt="logo" height={22} width={130} />
+        <Image src={"/logo.png"} alt="logo" height={22} width={130} />
         <MenuSheet />
       </CardContent>
     </Card>
