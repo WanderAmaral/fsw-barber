@@ -62,14 +62,15 @@ const MenuSheet = () => {
         ) : (
           <></>
         )}
-        <div className="w-full pt-3 flex flex-col gap-3 px-2" >
+        <div className="w-full pt-3 flex flex-col gap-3 px-2">
           <div className="flex">
             <Button
               variant={"secondary"}
-              className="w-full justify-start text-xs flex" asChild
+              className="w-full justify-start text-xs flex"
+              asChild
             >
               <Link href={"/"}>
-                <HomeIcon size={18} className="mr-2"/>
+                <HomeIcon size={18} className="mr-2" />
                 Inicio
               </Link>
             </Button>
@@ -80,24 +81,13 @@ const MenuSheet = () => {
               className="w-full justify-start text-xs"
               asChild
             >
-              <Link href={"/bookings"}>
+              <Link href={"/booking"}>
                 <CalendarIcon size={18} className="mr-2" />
                 Agendamentos
               </Link>
             </Button>
           )}
         </div>
-        {/* {status === "authenticated" && (
-          <div className="w-full pt-3 flex">
-            <Button
-              onClick={handleLogOutClick}
-              variant={"secondary"}
-              className="w-full justify-start text-xs"
-            >
-              Sair
-            </Button>
-          </div>
-        )} */}
       </SheetContent>
     </Sheet>
   );
