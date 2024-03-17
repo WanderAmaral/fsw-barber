@@ -2,7 +2,7 @@
 import { CalendarIcon, HomeIcon, LogInIcon, MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, signOut, useSession,   } from "next-auth/react";
 import { use, useEffect } from "react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import Link from "next/link";

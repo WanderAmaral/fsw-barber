@@ -13,7 +13,7 @@ export default async function Home() {
       <Header />
 
       <div className="py-6 px-5">
-        <h1 className="text-xl font-bold">Olá, Miguél</h1>
+        <h1 className="text-xl font-bold">Olá, Wander</h1>
         <p className=" capitalize text-sm">
           {format(new Date(), "EEEE, d 'de'  MMMM", { locale: ptBR })}
         </p>
