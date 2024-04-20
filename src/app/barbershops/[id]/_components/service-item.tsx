@@ -12,11 +12,12 @@ import {
 } from "@/app/_components/ui/sheet";
 import { Barbershop, Service } from "@prisma/client";
 import { ptBR } from "date-fns/locale";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { generateDateTimeLis } from "../_helpers/hours";
-import { format } from "date-fns";
+import { format, setMinutes, setHours } from "date-fns";
+import { saveBooking } from "../_actions/save-booking";
 
 interface ServiceItemProps {
   barbershop: Barbershop;
@@ -30,20 +31,43 @@ const ServiceItem = ({
   barbershop,
 }: ServiceItemProps) => {
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [hour, setHours] = useState<string | undefined>();
+  const [hour, setHour] = useState<string | undefined>();
+  const { data } = useSession();
 
   const handleCalendarClick = (date: Date | undefined) => {
     setDate(date);
-    setHours(undefined);
+    setHour(undefined);
   };
 
   const handleClickHour = (time: string) => {
-    setHours(time);
+    setHour(time);
   };
 
   const handleBookingClick = () => {
     if (!isAuthenticated) {
       return signIn("google");
+    }
+  };
+
+  const handleSubmitBooking = async () => {
+    try {
+      if (!date || !hour || !data?.user) {
+        return;
+      }
+
+      const dateHour = Number(hour.split(":")[0]);
+      const dateMinutes = Number(hour.split(":")[1]);
+
+      const newDate = setMinutes(setHours(date, dateHour), dateMinutes);
+
+      await saveBooking({
+        serveceId: service.id,
+        barbershopId: barbershop.id,
+        date: newDate,
+        userId: (data.user as any).id,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -147,7 +171,13 @@ const ServiceItem = ({
                   </div>
                   <SheetFooter>
                     <div className="px-4">
-                      <Button className="w-full">Confirmar</Button>
+                      <Button
+                        onClick={handleSubmitBooking}
+                        disabled={!hour && !date}
+                        className="w-full"
+                      >
+                        Confirmar
+                      </Button>
                     </div>
                   </SheetFooter>
                 </SheetContent>
