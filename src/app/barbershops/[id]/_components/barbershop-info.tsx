@@ -25,7 +25,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
             onClick={handleClickBack}
             variant={"outline"}
             size={"icon"}
-            className=""
+            
           >
             <ChevronLeftIcon />
           </Button>
