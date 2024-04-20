@@ -5,24 +5,31 @@ import { Card, CardContent } from "@/app/_components/ui/card";
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/app/_components/ui/sheet";
-import { Service } from "@prisma/client";
+import { Barbershop, Service } from "@prisma/client";
 import { ptBR } from "date-fns/locale";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { generateDateTimeLis } from "../_helpers/hours";
+import { format } from "date-fns";
 
 interface ServiceItemProps {
+  barbershop: Barbershop;
   service: Service;
   isAuthenticated: boolean;
 }
 
-const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
+const ServiceItem = ({
+  service,
+  isAuthenticated,
+  barbershop,
+}: ServiceItemProps) => {
+  const [date, setDate] = useState<Date | undefined>(undefined);
   const [hour, setHours] = useState<string | undefined>();
 
   const handleCalendarClick = (date: Date | undefined) => {
@@ -80,15 +87,13 @@ const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
                     <SheetTitle>Fazer reserva</SheetTitle>
                   </SheetHeader>
                   <Calendar
-                  
                     mode="single"
                     selected={date}
                     onSelect={handleCalendarClick}
-                    className="mt-6"
+                    className="mt-4"
                     locale={ptBR}
                     styles={{ caption: { textTransform: "capitalize" } }}
                     fromDate={new Date()}
-                    
                   />
                   {date && (
                     <div className="py-6 px-5 border-y border-solid border-secondary flex overflow-x-auto gap-3">
@@ -104,6 +109,47 @@ const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
                       ))}
                     </div>
                   )}
+                  <div className="px-5 py-6 border-t border-solid text-sm ">
+                    <Card>
+                      <CardContent className="p-3  flex flex-col gap-3 text-gray-400">
+                        <div className="flex justify-between">
+                          <h2 className="font-bold text-sm text-white">
+                            {service.name}
+                          </h2>
+                          <h3 className="font-bold text-sm text-white">
+                            {Intl.NumberFormat("pt-BR", {
+                              style: "currency",
+                              currency: "BRL",
+                            }).format(Number(service.price))}
+                          </h3>
+                        </div>
+                        {date && (
+                          <div className="flex justify-between">
+                            <h3>Data</h3>
+                            <h4>
+                              {format(date, "dd 'de' MMMM", { locale: ptBR })}
+                            </h4>
+                          </div>
+                        )}
+                        {hour && (
+                          <div className="flex justify-between">
+                            <h3 className="">Horário</h3>
+                            <h4>{hour}</h4>
+                          </div>
+                        )}
+
+                        <div className="flex justify-between">
+                          <h3>Barbearia</h3>
+                          <h4>{barbershop.name}</h4>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  <SheetFooter>
+                    <div className="px-4">
+                      <Button className="w-full">Confirmar</Button>
+                    </div>
+                  </SheetFooter>
                 </SheetContent>
               </Sheet>
             </div>
