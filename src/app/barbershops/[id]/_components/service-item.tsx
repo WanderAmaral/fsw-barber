@@ -18,6 +18,9 @@ import { useMemo, useState } from "react";
 import { generateDateTimeLis } from "../_helpers/hours";
 import { format, setMinutes, setHours } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
+import { LoaderIcon } from "lucide-react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface ServiceItemProps {
   barbershop: Barbershop;
@@ -30,8 +33,11 @@ const ServiceItem = ({
   isAuthenticated,
   barbershop,
 }: ServiceItemProps) => {
+  const router = useRouter();
+  const [submitIsLoading, setSubmitIsLoading] = useState(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [hour, setHour] = useState<string | undefined>();
+  const [sheetIsOpen, setSheetIsOpen] = useState(false);
   const { data } = useSession();
 
   const handleCalendarClick = (date: Date | undefined) => {
@@ -50,6 +56,7 @@ const ServiceItem = ({
   };
 
   const handleSubmitBooking = async () => {
+    setSubmitIsLoading(true);
     try {
       if (!date || !hour || !data?.user) {
         return;
@@ -66,8 +73,22 @@ const ServiceItem = ({
         date: newDate,
         userId: (data.user as any).id,
       });
+      setSheetIsOpen(false);
+      setDate(undefined);
+      setHour(undefined);
+      toast("Reserva realizada com sucesso", {
+        description: format(newDate, "'Para' dd 'de' MMMM 'ás' HH':'mm'.'", {
+          locale: ptBR,
+        }),
+        action: {
+          label: "Vizualizar",
+          onClick: () => router.push("/booking"),
+        },
+      });
     } catch (error) {
       console.log(error);
+    } finally {
+      setSubmitIsLoading(false);
     }
   };
 
@@ -100,7 +121,7 @@ const ServiceItem = ({
                   currency: "BRL",
                 }).format(Number(service.price))}
               </p>
-              <Sheet>
+              <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant={"secondary"} onClick={handleBookingClick}>
                     Reservar
@@ -173,9 +194,12 @@ const ServiceItem = ({
                     <div className="px-4">
                       <Button
                         onClick={handleSubmitBooking}
-                        disabled={!hour && !date}
-                        className="w-full"
+                        disabled={(!hour && !date) || submitIsLoading}
+                        className="w-full gap-2"
                       >
+                        {submitIsLoading && (
+                          <LoaderIcon className="wr-2 h-4 w-4 animate-spin" />
+                        )}
                         Confirmar
                       </Button>
                     </div>
