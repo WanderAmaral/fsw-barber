@@ -1,6 +1,6 @@
 import { addMinutes, format, setHours, setMinutes } from "date-fns";
 
-export function generateDateTimeLis(date: Date): string[] {
+export function generateDateTimeList(date: Date): string[] {
   const startTime = setMinutes(setHours(date, 9), 0);
   const endTime = setMinutes(setHours(date, 21), 0);
   const interval = 45;

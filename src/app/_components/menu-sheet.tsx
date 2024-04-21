@@ -17,10 +17,10 @@ const MenuSheet = () => {
   };
   const { data, status } = useSession();
 
-  useEffect(() => {
-    console.log({ data });
-    console.log({ status });
-  });
+  // useEffect(() => {
+  //   console.log({ data });
+  //   console.log({ status });
+  // });
 
   return (
     <Sheet>
