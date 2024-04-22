@@ -54,7 +54,7 @@ const MenuSheet = () => {
                 </Avatar>
                 {data.user?.name}
               </div>
-              <Button variant={"secondary"} size={"icon"}>
+              <Button variant={'ghost'} size={"icon"}>
                 <LogInIcon onClick={handleLogOutClick} />
               </Button>
             </div>
