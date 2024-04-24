@@ -160,20 +160,20 @@ const ServiceItem = ({
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="p-0">
-                  <SheetHeader className="text-left px-5 py-6 border-b border-secondary border-solid">
+                  <SheetHeader className="text-left px-5 py-3 border-b border-secondary border-solid">
                     <SheetTitle>Fazer reserva</SheetTitle>
                   </SheetHeader>
                   <Calendar
                     mode="single"
                     selected={date}
                     onSelect={handleCalendarClick}
-                    className="mt-4"
+                    
                     locale={ptBR}
                     styles={{ caption: { textTransform: "capitalize" } }}
                     fromDate={new Date()}
                   />
                   {date && (
-                    <div className="py-6 px-5 border-y border-solid border-secondary flex overflow-x-auto gap-3">
+                    <div className="py-3 px-5 border-y border-solid border-secondary flex overflow-x-auto gap-3">
                       {timeList.map((time) => (
                         <Button
                           onClick={() => handleClickHour(time)}

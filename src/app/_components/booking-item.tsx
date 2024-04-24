@@ -6,12 +6,16 @@ import { format, isFuture, isPast } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
 import Image from "next/image";
+import { Button } from "./ui/button";
+import { Smartphone } from "lucide-react";
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -78,40 +82,67 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           >
             {bookingIsConfirmed ? "Confirmado" : "Finalizado"}
           </Badge>
-          
-            <Card className="my-5">
-              <CardContent className="p-3  flex flex-col gap-3 text-gray-400">
-                <div className="flex justify-between">
-                  <h2 className="font-bold text-sm text-white">
-                    {booking.service.name}
-                  </h2>
-                  <h3 className="font-bold text-sm text-white">
-                    {Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(Number(booking.service.price))}
-                  </h3>
-                </div>
 
-                <div className="flex justify-between">
-                  <h3>Data</h3>
-                  <h4 className="text-white">
-                    {format(booking.date, "dd 'de' MMMM", { locale: ptBR })}
-                  </h4>
-                </div>
+          <Card className="my-5">
+            <CardContent className="p-3  flex flex-col gap-3 text-gray-400">
+              <div className="flex justify-between">
+                <h2 className="font-bold text-sm text-white">
+                  {booking.service.name}
+                </h2>
+                <h3 className="font-bold text-sm text-white">
+                  {Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(Number(booking.service.price))}
+                </h3>
+              </div>
 
-                <div className="flex justify-between">
-                  <h3>Horário</h3>
-                  <h4 className="text-white">{format(booking.date, "hh:mm")}</h4>
-                </div>
+              <div className="flex justify-between">
+                <h3>Data</h3>
+                <h4 className="text-white">
+                  {format(booking.date, "dd 'de' MMMM", { locale: ptBR })}
+                </h4>
+              </div>
 
-                <div className="flex justify-between">
-                  <h3>Barbearia</h3>
-                  <h4 className="text-white">{booking.barbershop.name}</h4>
-                </div>
-              </CardContent>
-            </Card>
-          
+              <div className="flex justify-between">
+                <h3>Horário</h3>
+                <h4 className="text-white">{format(booking.date, "hh:mm")}</h4>
+              </div>
+
+              <div className="flex justify-between">
+                <h3>Barbearia</h3>
+                <h4 className="text-white">{booking.barbershop.name}</h4>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Smartphone size={20} />
+              <p className="text-sm text-gray-400">11 98204-5108</p>
+            </div>
+
+            <Button variant={"outline"}>Copiar</Button>
+          </div>
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center gap-2">
+              <Smartphone size={20} />
+              <p className="text-sm text-gray-400">11 94002-8922</p>
+            </div>
+
+            <Button variant={"outline"}>Copiar</Button>
+          </div>
+          <SheetFooter className="flex-row gap-3">
+            <SheetClose asChild>
+              <Button variant={"secondary"} className="w-full">
+                Voltar
+              </Button>
+            </SheetClose>
+            <Button variant={"destructive"} className="w-full">
+              Cancelar
+            </Button>
+          </SheetFooter>
+          <div className="flex gap-3"></div>
         </div>
       </SheetContent>
     </Sheet>
