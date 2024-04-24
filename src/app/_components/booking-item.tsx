@@ -18,6 +18,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
   const bookingIsConfirmed = isFuture(booking.date);
 
   return (
+    
     <Card className="mb-3">
       <CardContent className=" flex  py-0 px-0">
         <div className="flex flex-col gap-2 py-3 flex-[3] pl-4">

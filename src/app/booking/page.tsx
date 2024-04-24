@@ -23,8 +23,10 @@ const Booking = async () => {
     },
   });
 
-  const confirmedBookings = bookings.filter((booking => isFuture(booking.date)))
-  const fineshedBookings = bookings.filter((booking => isPast(booking.date)))
+  const confirmedBookings = bookings.filter((booking) =>
+    isFuture(booking.date)
+  );
+  const fineshedBookings = bookings.filter((booking) => isPast(booking.date));
 
   return (
     <>
@@ -32,25 +34,32 @@ const Booking = async () => {
       <div className="px-5 py-6">
         <h1 className="font-bold text-xl">Agendamentos</h1>
 
-        <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
-          Confirmados
-        </h2>
+        {/* Se tiver algum item na lista confirmedBooking maior que 0, ele rederiza o titulo e o componente */}
+        {confirmedBookings.length > 0 ? (
+          <>
+            <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
+              Confirmados
+            </h2>
 
-        <div className="flex flex-col gap-3">
-          {confirmedBookings.map((booking) => (
-            <BookingItem key={booking.id} booking={booking} />
-          ))}
-        </div>
-
-        <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
-          Finalizados
-        </h2>
-
-        <div className="flex flex-col gap-3">
-          {fineshedBookings.map((booking) => (
-            <BookingItem key={booking.id} booking={booking} />
-          ))}
-        </div>
+            <div className="flex flex-col gap-3">
+              {confirmedBookings.map((booking) => (
+                <BookingItem key={booking.id} booking={booking} />
+              ))}
+            </div>
+          </>
+        ) : null}
+        {fineshedBookings.length > 0 ? (
+          <>
+            <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
+              Finalizados
+            </h2>
+            <div className="flex flex-col gap-3">
+              {fineshedBookings.map((booking) => (
+                <BookingItem key={booking.id} booking={booking} />
+              ))}
+            </div>
+          </>
+        ) : null}
       </div>
     </>
   );
