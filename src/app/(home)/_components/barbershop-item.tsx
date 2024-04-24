@@ -12,7 +12,7 @@ interface BarbershopItemProps {
 }
 
 const BarbershopItem = ({ barbershop }: BarbershopItemProps) => {
-  const router = useRouter();
+  const router = useRouter(); 
 
   const handleBookingClick = () => {
     router.push(`/barbershops/${barbershop.id}`);

@@ -2,7 +2,7 @@
 import { CalendarIcon, HomeIcon, LogInIcon, MenuIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
-import { signIn, signOut, useSession,   } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { use, useEffect } from "react";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
@@ -21,6 +21,8 @@ const MenuSheet = () => {
   //   console.log({ data });
   //   console.log({ status });
   // });
+
+  const firstName = data?.user?.name?.["0"];
 
   return (
     <Sheet>
@@ -49,12 +51,12 @@ const MenuSheet = () => {
           <div className="text-sm w-full py-5 ">
             <div className="flex items-center gap-3 justify-between">
               <div className=" flex items-center gap-3">
-                <Avatar>
-                  <AvatarImage src={data.user?.image ?? ""} />
+                <Avatar className="flex items-center border justify-center">
+                  <AvatarImage src={data.user?.image ?? firstName} />
                 </Avatar>
                 {data.user?.name}
               </div>
-              <Button variant={'ghost'} size={"icon"}>
+              <Button variant={"ghost"} size={"icon"}>
                 <LogInIcon onClick={handleLogOutClick} />
               </Button>
             </div>

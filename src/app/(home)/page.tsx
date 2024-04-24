@@ -21,10 +21,10 @@ export default async function Home() {
       <div className="px-5 py-6">
         <Search />
       </div>
-      <div className="px-5">
+      {/* <div className="px-5">
         <h1 className="text-[#838896] mb-3 text-sm uppercase">Agendamentos</h1>
         <BookingItem />
-      </div>
+      </div> */}
       <div className="mt-6">
         <h1 className="text-[#838896] mb-3 text-sm uppercase px-5">
           Recomendados
