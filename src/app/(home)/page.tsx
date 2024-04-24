@@ -8,6 +8,7 @@ import { db } from "../_lib/prisma";
 
 export default async function Home() {
   const barbershop = await db.barbershop.findMany({});
+  
   return (
     <div>
       <Header />

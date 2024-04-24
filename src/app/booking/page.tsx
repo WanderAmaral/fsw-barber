@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { db } from "../_lib/prisma";
 import BookingItem from "../_components/booking-item";
+import { isFuture, isPast } from "date-fns";
 
 const Booking = async () => {
   const session = await getServerSession(authOptions);
@@ -22,6 +23,9 @@ const Booking = async () => {
     },
   });
 
+  const confirmedBookings = bookings.filter((booking => isFuture(booking.date)))
+  const fineshedBookings = bookings.filter((booking => isPast(booking.date)))
+
   return (
     <>
       <Header />
@@ -33,7 +37,7 @@ const Booking = async () => {
         </h2>
 
         <div className="flex flex-col gap-3">
-          {bookings.map((booking) => (
+          {confirmedBookings.map((booking) => (
             <BookingItem key={booking.id} booking={booking} />
           ))}
         </div>
@@ -43,7 +47,7 @@ const Booking = async () => {
         </h2>
 
         <div className="flex flex-col gap-3">
-          {bookings.map((booking) => (
+          {fineshedBookings.map((booking) => (
             <BookingItem key={booking.id} booking={booking} />
           ))}
         </div>
