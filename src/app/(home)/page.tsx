@@ -7,6 +7,8 @@ import { db } from "../_lib/prisma";
 import NameUser from "./_components/name-user";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -33,7 +35,16 @@ export default async function Home() {
     <div>
       <Header />
 
-      <NameUser />
+      <div className="py-6 px-5">
+        <h1 className="text-xl font-bold">
+          {session?.user
+            ? `Olá ${session.user.name?.split(" ")[0]}`
+            : "Olá, vamos agendar um corte hoje?"}
+        </h1>
+        <p className=" capitalize text-sm">
+          {format(new Date(), "EEEE, d 'de'  MMMM", { locale: ptBR })}
+        </p>
+      </div>
       <div className="px-5 py-6">
         <Search />
       </div>
