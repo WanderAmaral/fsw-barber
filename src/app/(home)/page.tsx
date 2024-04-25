@@ -11,26 +11,23 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
-
-
   const [barbershops, confimedBookings] = await Promise.all([
     db.barbershop.findMany({}),
     session?.user
-    ? await db.booking.findMany({
-        where: {
-          userId: (session?.user as any).id,
-          date: {
-            gte: new Date(),
+      ? await db.booking.findMany({
+          where: {
+            userId: (session?.user as any).id,
+            date: {
+              gte: new Date(),
+            },
           },
-        },
-        include: {
-          service: true,
-          barbershop: true,
-        },
-      })
-    : []
-  ])
-
+          include: {
+            service: true,
+            barbershop: true,
+          },
+        })
+      : [],
+  ]);
 
   return (
     <div>
@@ -40,14 +37,18 @@ export default async function Home() {
       <div className="px-5 py-6">
         <Search />
       </div>
-      <div className="px-5">
-        <h1 className="text-[#838896] mb-3 text-sm uppercase">Agendamentos</h1>
-        <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden ">
-          {confimedBookings.map((booking) => (
-            <BookingItem key={booking.id} booking={booking} />
-          ))}
+      {confimedBookings.length > 0 && (
+        <div className="px-5">
+          <h1 className="text-[#838896] mb-3 text-sm uppercase">
+            Agendamentos
+          </h1>
+          <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden ">
+            {confimedBookings.map((booking) => (
+              <BookingItem key={booking.id} booking={booking} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       <div className="mt-6">
         <h1 className="text-[#838896] mb-3 text-sm uppercase px-5">
           Recomendados
