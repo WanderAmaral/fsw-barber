@@ -1,8 +1,9 @@
+"use client";
 import { Prisma } from "@prisma/client";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
-import { format, isFuture, isPast } from "date-fns";
+import { format, isFuture } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
   Sheet,
@@ -15,7 +16,10 @@ import {
 } from "./ui/sheet";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { Smartphone } from "lucide-react";
+import { LoaderIcon, Smartphone } from "lucide-react";
+import { cancelBooking } from "../_actions/cancel-booking";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -27,10 +31,27 @@ interface BookingItemProps {
 }
 
 const BookingItem = ({ booking }: BookingItemProps) => {
+  const [sheetIsOpen, setSheetIsOpen] = useState(false);
+  const [isDeleteLoading, setDeleteIsLoading] = useState(false);
+
   const bookingIsConfirmed = isFuture(booking.date);
 
+  const handleCancelBookingClick = async () => {
+    setDeleteIsLoading(true)
+    try {
+      setSheetIsOpen(false);
+      await cancelBooking(booking.id);
+
+      toast.success("Reserva cancelada com sucesso");
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeleteIsLoading(false);
+    }
+  };
+
   return (
-    <Sheet>
+    <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
       <SheetTrigger asChild>
         <Card className="mb-3 min-w-full">
           <CardContent className=" flex  py-0 px-0">
@@ -138,7 +159,15 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 Voltar
               </Button>
             </SheetClose>
-            <Button variant={"destructive"} className="w-full">
+            <Button
+              onClick={handleCancelBookingClick}
+              variant={"destructive"}
+              disabled={!bookingIsConfirmed || isDeleteLoading}
+              className="w-full"
+            >
+              {isDeleteLoading && (
+                <LoaderIcon className="wr-2 h-4 w-4 animate-spin" />
+              )}
               Cancelar
             </Button>
           </SheetFooter>
