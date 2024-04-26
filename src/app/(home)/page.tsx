@@ -6,9 +6,9 @@ import { db } from "../_lib/prisma";
 
 import NameUser from "./_components/name-user";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { authOptions } from "../_lib/auth";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
