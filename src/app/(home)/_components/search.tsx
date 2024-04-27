@@ -22,15 +22,20 @@ const formSchema = z.object({
     .min(1, "Campo obrigatório"),
 });
 
-const Search = () => {
+interface SearchProps {
+  defaultValues?: z.infer<typeof formSchema>;
+}
+
+const Search = ({ defaultValues }: SearchProps) => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues,
   });
 
   const handleSubmit = (data: z.infer<typeof formSchema>) => {
-    router.push(`/barbershops?search=${data.search}`)
+    router.push(`/barbershops?search=${data.search}`);
   };
 
   return (
@@ -46,7 +51,7 @@ const Search = () => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input placeholder="Busque uma Barbearia..." {...field} />
+                  <Input  placeholder="Busque uma Barbearia..." {...field} />
                 </FormControl>
 
                 <FormMessage />
