@@ -16,7 +16,7 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { generateDateTimeList } from "../_helpers/hours";
-import { format, setMinutes, setHours } from "date-fns";
+import { format, setMinutes, setHours, addDays } from "date-fns";
 import { saveBooking } from "../_actions/save-booking";
 import { LoaderIcon } from "lucide-react";
 import { toast } from "sonner";
@@ -167,10 +167,9 @@ const ServiceItem = ({
                     mode="single"
                     selected={date}
                     onSelect={handleCalendarClick}
-                    
                     locale={ptBR}
                     styles={{ caption: { textTransform: "capitalize" } }}
-                    fromDate={new Date()}
+                    fromDate={addDays(new Date(), 1)}
                   />
                   {date && (
                     <div className="py-3 px-5 border-y border-solid border-secondary flex overflow-x-auto gap-3">
