@@ -41,7 +41,7 @@ const Booking = async () => {
     }),
   ]);
 
-  // mesma coisa que a req acima
+  // mesma coisa que a query acima
 
   // const confirmedBookings = bookings.filter((booking) =>
   //   isFuture(booking.date)

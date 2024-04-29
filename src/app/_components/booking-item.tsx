@@ -165,18 +165,26 @@ const BookingItem = ({ booking }: BookingItemProps) => {
           </div>
           <SheetFooter className="flex-row gap-3">
             <SheetClose asChild>
-              <Button variant={"secondary"} className="w-full">
-                Voltar
-              </Button>
+              {bookingIsConfirmed ? (
+                <Button variant={"secondary"} className="w-full">
+                  Voltar
+                </Button>
+              ) : (
+                <Button variant={"secondary"} className="w-full">
+                  Finalizado com sucesso!
+                </Button>
+              )}
             </SheetClose>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant={"destructive"} className="w-full">
-                  {isDeleteLoading && (
-                    <LoaderIcon className="wr-2 h-4 w-4 animate-spin" />
-                  )}
-                  Cancelar
-                </Button>
+                {bookingIsConfirmed && (
+                  <Button variant={"destructive"} className="w-full">
+                    {isDeleteLoading && (
+                      <LoaderIcon className="wr-2 h-4 w-4 animate-spin" />
+                    )}
+                    Cancelar
+                  </Button>
+                )}
               </AlertDialogTrigger>
               <AlertDialogContent className="w-[90%] rounded-xl">
                 <AlertDialogHeader>
