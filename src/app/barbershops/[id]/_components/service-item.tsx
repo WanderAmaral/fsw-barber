@@ -133,7 +133,7 @@ const ServiceItem = ({
   return (
     <Card>
       <CardContent className="p-3 w-full">
-        <div className="flex gap-4 items-center w-full">
+        <div className="flex gap-4 items-center ">
           <div className="relative h-[110px] w-[110px] min-w-[110px] min-h-[110px] max-w-[110px]">
             <Image
               className="rounded-lg"
@@ -143,7 +143,7 @@ const ServiceItem = ({
               style={{ objectFit: "contain" }}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
             <h2 className="font-bold text-sm">{service.name}</h2>
             <p className="text-sm text-gray-400">{service.description}</p>
             <div className="flex items-center justify-between mt-2">
@@ -222,7 +222,7 @@ const ServiceItem = ({
                     </Card>
                   </div>
                   <SheetFooter>
-                    <div className="px-4">
+                    <div className="px-4 ">
                       <Button
                         onClick={handleSubmitBooking}
                         disabled={(!hour && !date) || submitIsLoading}

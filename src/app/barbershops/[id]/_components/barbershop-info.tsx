@@ -21,12 +21,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
     <div>
       <div className="h-[250px] w-full relative">
         <div className="p-6 flex justify-between z-50 absolute w-full">
-          <Button
-            onClick={handleClickBack}
-            variant={"outline"}
-            size={"icon"}
-            
-          >
+          <Button onClick={handleClickBack} variant={"outline"} size={"icon"}>
             <ChevronLeftIcon />
           </Button>
           <div className="h-full">
