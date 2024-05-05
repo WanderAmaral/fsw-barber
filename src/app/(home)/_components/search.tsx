@@ -39,7 +39,7 @@ const Search = ({ defaultValues }: SearchProps) => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 justify-between">
       <Form {...form}>
         <form
           className="flex gap-4 w-full"
@@ -51,7 +51,7 @@ const Search = ({ defaultValues }: SearchProps) => {
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>
-                  <Input  placeholder="Busque uma Barbearia..." {...field} />
+                  <Input placeholder="Busque uma Barbearia..." {...field} />
                 </FormControl>
 
                 <FormMessage />

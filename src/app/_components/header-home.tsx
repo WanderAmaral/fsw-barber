@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { Calendar, User2Icon } from "lucide-react";
 import Search from "../(home)/_components/search";
 
-const Header = () => {
+const HeaderHome = () => {
   return (
     <Card>
       <CardContent className="py-6 px-5 flex items-center justify-between">
@@ -17,9 +17,7 @@ const Header = () => {
         <div className=" md:hidden">
           <MenuSheet />
         </div>
-        <div className="hidden md:block w-[40%]">
-          <Search />
-        </div>
+        
         <div className="hidden md:block ">
           <div className="flex gap-3 ">
             <Button variant={"secondary"} className="gap-2" asChild>
@@ -39,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderHome;
