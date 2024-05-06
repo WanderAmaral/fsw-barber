@@ -14,7 +14,7 @@ const Header = () => {
             <span className="text-primary">FSW </span>BARBER
           </h1>
         </Link>
-        <div className=" md:hidden">
+        <div className=" md:hidden lg:px-0">
           <MenuSheet />
         </div>
         <div className="hidden md:block w-[40%]">
@@ -30,7 +30,7 @@ const Header = () => {
             </Button>
             <Button className="gap-2">
               <User2Icon size={16} />
-              Perfil
+              Fazer Login
             </Button>
           </div>
         </div>

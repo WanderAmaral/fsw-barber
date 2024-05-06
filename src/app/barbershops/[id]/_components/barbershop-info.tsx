@@ -20,7 +20,7 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
   return (
     <div>
       <div className="h-[250px] w-full relative">
-        <div className="p-6 flex justify-between z-50 absolute w-full">
+        <div className="p-6 flex justify-between z-50 absolute w-full lg:hidden re">
           <Button onClick={handleClickBack} variant={"outline"} size={"icon"}>
             <ChevronLeftIcon />
           </Button>
@@ -28,14 +28,26 @@ const BarbershopInfo = ({ barbershop }: BarbershopInfoProps) => {
             <MenuSheet />
           </div>
         </div>
-        <Image
-          src={barbershop.imageUrl}
-          alt={barbershop.name}
-          fill
-          style={{ objectFit: "cover" }}
-        />
+
+        <div className=" lg:hidden">
+          <Image
+            src={barbershop.imageUrl}
+            alt={barbershop.name}
+            fill
+            style={{ objectFit: "cover" }}
+          />
+        </div>
+        <div className=" hidden md:block">
+          <Image
+            src={barbershop.imageUrl}
+            alt={barbershop.name}
+            fill
+            style={{ objectFit: "cover" }}
+            className="lg:rounded-xl"
+          />
+        </div>
       </div>
-      <div className="px-5 pt-3 p-6 border-b border-solid border-secundary">
+      <div className="px-5 pt-3 p-6 border-b border-solid border-secundary lg:border-none lg:px-0">
         <h1 className="text-xl font-bold">{barbershop.name}</h1>
         <div className="flex items-center gap-3 mt-2">
           <MapPinIcon className=" text-primary" size={16} />
