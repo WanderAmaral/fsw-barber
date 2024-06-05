@@ -159,7 +159,7 @@ const ServiceItem = ({
                     Reservar
                   </Button>
                 </SheetTrigger>
-                <SheetContent className="p-0">
+                <SheetContent className="p-0 overflow-scroll">
                   <SheetHeader className="text-left px-5 py-3 border-b border-secondary border-solid">
                     <SheetTitle>Fazer reserva</SheetTitle>
                   </SheetHeader>
@@ -222,7 +222,7 @@ const ServiceItem = ({
                     </Card>
                   </div>
                   <SheetFooter>
-                    <div className="px-4 ">
+                    <div className="px-4 pb-4">
                       <Button
                         onClick={handleSubmitBooking}
                         disabled={(!hour && !date) || submitIsLoading}

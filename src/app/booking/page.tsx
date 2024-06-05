@@ -45,7 +45,7 @@ const Booking = async () => {
     <>
       <Header />
 
-        <h1 className="font-bold text-xl md:text-center md:py-4">Agendamentos</h1>
+      <h1 className="font-bold text-xl md:text-center px-4 pt-4 md:py-4">Agendamentos</h1>
       <div className="px-5 py-6 md:container md:max-w-[50%] md:grid md:grid-cols-2 md:gap-4">
         <div>
           {confirmedBookings.length > 0 ? (
