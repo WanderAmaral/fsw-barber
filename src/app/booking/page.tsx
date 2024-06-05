@@ -41,45 +41,43 @@ const Booking = async () => {
     }),
   ]);
 
-  // mesma coisa que a query acima
-
-  // const confirmedBookings = bookings.filter((booking) =>
-  //   isFuture(booking.date)
-  // );
-  // const fineshedBookings = bookings.filter((booking) => isPast(booking.date));
-
   return (
     <>
       <Header />
-      <div className="px-5 py-6">
-        <h1 className="font-bold text-xl">Agendamentos</h1>
 
-        {/* Se tiver algum item na lista confirmedBooking maior que 0, ele rederiza o titulo e o componente */}
-        {confirmedBookings.length > 0 ? (
-          <>
-            <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
-              Confirmados
-            </h2>
+        <h1 className="font-bold text-xl md:text-center md:py-4">Agendamentos</h1>
+      <div className="px-5 py-6 md:container md:max-w-[50%] md:grid md:grid-cols-2 md:gap-4">
+        <div>
+          {confirmedBookings.length > 0 ? (
+            <>
+              <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
+                Confirmados
+              </h2>
 
-            <div className="flex flex-col gap-3">
-              {confirmedBookings.map((booking) => (
-                <BookingItem key={booking.id} booking={booking} />
-              ))}
-            </div>
-          </>
-        ) : null}
-        {fineshedBookings.length > 0 ? (
-          <>
-            <h2 className="py-3 text-gray-400 uppercase text-sm font-bold">
-              Finalizados
-            </h2>
-            <div className="flex flex-col gap-3">
-              {fineshedBookings.map((booking) => (
-                <BookingItem key={booking.id} booking={booking} />
-              ))}
-            </div>
-          </>
-        ) : null}
+              <div className="flex flex-col gap-3 cursor-pointer ">
+                {confirmedBookings.map((booking) => (
+                  <BookingItem key={booking.id} booking={booking} />
+                ))}
+              </div>
+            </>
+          ) : null}
+        </div>
+        <div>
+          {fineshedBookings.length > 0 ? (
+            <>
+              <h2 className="py-3 text-gray-400 uppercase text-sm font-bold ">
+                Finalizados
+              </h2>
+              <div className="flex flex-col gap-3 cursor-pointer">
+                {fineshedBookings.map((booking) => (
+                  <BookingItem key={booking.id} booking={booking} />
+                ))}
+              </div>
+            </>
+          ) : null}
+        </div>
+
+        {/* Se tiver algum item na lista confirmedBooking maior que 0, ele renderiza o titulo e o componente */}
       </div>
     </>
   );

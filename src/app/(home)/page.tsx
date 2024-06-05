@@ -1,10 +1,7 @@
-import Header from "../_components/header";
 import Search from "./_components/search";
 import BookingItem from "../_components/booking-item";
 import BarbershopItem from "./_components/barbershop-item";
 import { db } from "../_lib/prisma";
-
-import NameUser from "./_components/name-user";
 import { getServerSession } from "next-auth";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -44,6 +41,7 @@ export default async function Home() {
                 ? `Olá ${session.user.name?.split(" ")[0]}`
                 : "Olá, vamos agendar um corte hoje?"}
             </h1>
+            
             <p className=" capitalize text-sm">
               {format(new Date(), "EEEE, d 'de'  MMMM", { locale: ptBR })}
             </p>
@@ -54,7 +52,7 @@ export default async function Home() {
               <h1 className="text-[#838896] mb-3 text-sm uppercase">
                 Agendamentos
               </h1>
-              <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden ">
+              <div className="flex gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden md:hover:transform-none">
                 {confimedBookings.map((booking) => (
                   <BookingItem key={booking.id} booking={booking} />
                 ))}
